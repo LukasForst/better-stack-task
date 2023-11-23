@@ -6,8 +6,8 @@
 */
 
 $database = array(
-	'address' 	=> '',
-	'username'	=> '',
-	'password'	=> '',
-	'database'	=> ''
+	'address' 	=> getenv('DB_ADDRESS'),
+	'username'	=> getenv('DB_USER'),
+	'password'	=> getenv('DB_PASSWORD'),
+	'database'	=> getenv('DB_DATABASE')
 );

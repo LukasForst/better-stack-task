@@ -5,11 +5,24 @@ services:
     image: mysql:8.2
     environment:
       # database name
-      MYSQL_DATABASE: app
+      MYSQL_DATABASE: ${DB_DATABASE:-app}
       # root's password
-      MYSQL_ROOT_PASSWORD: local
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-local}
     ports:
       - "3306:3306"
     volumes:
       # inits database with the specified schema
       - ./database/:/docker-entrypoint-initdb.d/:ro
+
+  be:
+    image: be
+    build:
+      dockerfile: Dockerfile
+      context: .
+    environment:
+      DB_ADDRESS: "db:3306"
+      DB_USER: ${DB_USER:-root}
+      DB_PASSWORD: ${DB_PASSWORD:-local}
+      DB_DATABASE: ${DB_DATABASE:-app}
+    ports:
+      - "8080:80"

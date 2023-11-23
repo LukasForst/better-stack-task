@@ -30,16 +30,50 @@
 <form method="post" action="create.php">
 
     <label for="name">Name:</label>
-    <input name="name" input="text" id="name"/>
+    <input type="text" name="name" id="name" />
 
     <label for="email">E-mail:</label>
-    <input name="email" input="text" id="email"/>
+    <input type="text" name="email" id="email" />
 
     <label for="city">City:</label>
-    <input name="city" input="text" id="city"/>
+    <input type="text" name="city" id="city" />
 
     <label for="phone">Phone:</label>
-    <input name="phone" input="text" id="phone"/>
+    <input type="text" name="phone" id="phone" />
 
-    <button>Create new row</button>
+    <button type="button" id="submitBtn">Create new row</button>
 </form>
+
+<script>
+    $(document).ready(function(){
+        $("#submitBtn").click(function(){
+            // Get form data
+            const name = $("#name").val();
+            const email = $("#email").val();
+            const city = $("#city").val();
+            const phone = $("#phone").val();
+
+            // Client-side validation
+            if(name === '' || email === ''){
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            // Make AJAX request
+            $.ajax({
+                type: "POST",
+                url: "create.php",
+                data: {
+                    name: name,
+                    email: email,
+                    city: city,
+                    phone: phone
+                },
+                success: function(response){
+                    // Handle the response from the server
+                    alert(response);
+                }
+            });
+        });
+    });
+</script>

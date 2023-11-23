@@ -23,3 +23,13 @@ Below is a set of simple tasks to perform. Please write a production-ready code.
 6. Please deploy the project to any freehosting and send us the production link.
 
 Thank you! 🙏
+
+
+# Solution
+
+
+## Deployment
+In order to run it inside docker, create `.env` file and fill real values
+```bash
+cp .env.template .env
+```

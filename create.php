@@ -16,4 +16,5 @@ $user->insert(array(
 ));
 
 // Redirect back to index
-header('Location: index.php');
+//header('Location: index.php');
+echo "Form data submitted successfully!";
