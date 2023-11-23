@@ -3,44 +3,66 @@
 <h1>PHP Test Application</h1>
 
 <label for="filterInput">Filter by City:</label>
-<input type="text" id="filterInput" onkeyup="cityFilter()" placeholder="Filter city...">
-
-<table id="userTable">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>E-mail</th>
-        <th>City</th>
-        <th>Phone</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($users as &$user): ?>
+<!-- TODO: add pagination -->
+<div class="container mt-5">
+    <input type="text" id="filterInput" onkeyup="cityFilter()" placeholder="Filter city...">
+    <table class="table" id="userTable">
+        <thead class="thead-dark">
         <tr>
-            <td><?= $user->getName() ?></td>
-            <td><?= $user->getEmail() ?></td>
-            <td><?= $user->getCity() ?></td>
-            <td><?= $user->getPhone() ?></td>
+            <th>Name</th>
+            <th>E-mail</th>
+            <th>City</th>
+            <th>Phone</th>
         </tr>
-    <?php endforeach; ?>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        <?php foreach ($users as &$user): ?>
+            <tr>
+                <td><?= $user->getName() ?></td>
+                <td><?= $user->getEmail() ?></td>
+                <td><?= $user->getCity() ?></td>
+                <td><?= $user->getPhone() ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
 
-<form>
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name"/>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">Name:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="name" id="name"/>
+            </div>
+        </div>
 
-    <label for="email">E-mail:</label>
-    <input type="text" name="email" id="email"/>
+        <div class="form-group">
+            <label for="email" class="col-sm-2 control-label">E-mail:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="email" id="email"/>
+            </div>
+        </div>
 
-    <label for="city">City:</label>
-    <input type="text" name="city" id="city"/>
+        <div class="form-group">
+            <label for="city" class="col-sm-2 control-label">City:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="city" id="city"/>
+            </div>
+        </div>
 
-    <label for="phone">Phone:</label>
-    <input type="text" name="phone" id="phone"/>
+        <div class="form-group">
+            <label for="phone" class="col-sm-2 control-label">Phone:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="phone" id="phone"/>
+            </div>
+        </div>
 
-    <button type="button" id="submitBtn">Create new row</button>
-</form>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" class="btn btn-primary" id="submitBtn">Create new row</button>
+            </div>
+        </div>
+    </form>
+</div>
 
 <script>
     $(document).ready(() => {
