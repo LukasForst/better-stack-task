@@ -6,6 +6,7 @@
         <th>Name</th>
         <th>E-mail</th>
         <th>City</th>
+        <th>Phone</th>
     </tr>
     </thead>
     <tbody>
@@ -14,6 +15,7 @@
             <td><?= $user->getName() ?></td>
             <td><?= $user->getEmail() ?></td>
             <td><?= $user->getCity() ?></td>
+            <td><?= $user->getPhone() ?></td>
         </tr>
     <?php endforeach; ?>
     </tbody>
@@ -29,6 +31,9 @@
 
     <label for="city">City:</label>
     <input name="city" input="text" id="city"/>
+
+    <label for="phone">Phone:</label>
+    <input name="phone" input="text" id="phone"/>
 
     <button>Create new row</button>
 </form>
