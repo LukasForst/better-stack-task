@@ -1,0 +1,15 @@
+version: '3.1'
+
+services:
+  db:
+    image: mysql:8.2
+    environment:
+      # database name
+      MYSQL_DATABASE: app
+      # root's password
+      MYSQL_ROOT_PASSWORD: local
+    ports:
+      - "3306:3306"
+    volumes:
+      # inits database with the specified schema
+      - ./database/:/docker-entrypoint-initdb.d/:ro
