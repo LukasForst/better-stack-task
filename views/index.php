@@ -26,35 +26,33 @@
     </tbody>
 </table>
 
-<!-- TODO: add frontend validation here -->
-<form method="post" action="create.php">
-
+<form>
     <label for="name">Name:</label>
-    <input type="text" name="name" id="name" />
+    <input type="text" name="name" id="name"/>
 
     <label for="email">E-mail:</label>
-    <input type="text" name="email" id="email" />
+    <input type="text" name="email" id="email"/>
 
     <label for="city">City:</label>
-    <input type="text" name="city" id="city" />
+    <input type="text" name="city" id="city"/>
 
     <label for="phone">Phone:</label>
-    <input type="text" name="phone" id="phone" />
+    <input type="text" name="phone" id="phone"/>
 
     <button type="button" id="submitBtn">Create new row</button>
 </form>
 
 <script>
-    $(document).ready(function(){
-        $("#submitBtn").click(function(){
-            // Get form data
+    $(document).ready(() => {
+        $("#submitBtn").click(() => {
             const name = $("#name").val();
             const email = $("#email").val();
             const city = $("#city").val();
             const phone = $("#phone").val();
 
-            // Client-side validation
-            if(name === '' || email === ''){
+            // TODO: add frontend validation here
+            if (name === '' || email === '') {
+                // TODO: print this to filed nex tot ht e
                 alert('Please fill in all required fields.');
                 return;
             }
@@ -69,9 +67,14 @@
                     city: city,
                     phone: phone
                 },
-                success: function(response){
-                    // Handle the response from the server
-                    alert(response);
+                success: (r) => {
+                    // TODO: redraw the user view with data we just received
+                    console.log(r)
+                    window.location.reload();
+                },
+                error: (r) => {
+                    // TODO: propagate data from error to error box
+                    console.log(r);
                 }
             });
         });

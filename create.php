@@ -15,6 +15,9 @@ $user->insert(array(
     'phone' => $_POST['phone'],
 ));
 
-// Redirect back to index
-//header('Location: index.php');
-echo "Form data submitted successfully!";
+// Now we should get all users from the database to refresh the view
+$users = $user::find($app->db, '*');
+// and respond with JJSON
+header('Content-Type: application/json; charset=utf-8');
+echo json_encode(array('users' => $users));
+
