@@ -1,6 +1,11 @@
+<script type="text/javascript" charset="utf-8" src="js/city_filter.js"></script>
+
 <h1>PHP Test Application</h1>
 
-<table>
+<label for="filterInput">Filter by City:</label>
+<input type="text" id="filterInput" onkeyup="cityFilter()" placeholder="Filter city...">
+
+<table id="userTable">
     <thead>
     <tr>
         <th>Name</th>
@@ -21,6 +26,7 @@
     </tbody>
 </table>
 
+<!-- TODO: add frontend validation here -->
 <form method="post" action="create.php">
 
     <label for="name">Name:</label>
