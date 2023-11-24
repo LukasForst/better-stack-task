@@ -1,11 +1,17 @@
-<script type="text/javascript" charset="utf-8" src="js/city_filter.js"></script>
+<div class="container">
+    <h1>List of Users</h1>
 
-<h1>PHP Test Application</h1>
+    <div class="row">
+        <div class="col-md-5 col-sm-5 col-xs-5">
+            <input type="text" id="filterInput" class="form-control" onkeyup="filterTableByRow(2)"
+                   placeholder="Filter city...">
+        </div>
+        <div class="col-md-1 col-md-offset-5 col-sm-1 col-sm-offset-5 col-xs-1 col-xs-offset-5">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-record-modal">Add New
+            </button>
+        </div>
+    </div>
 
-<label for="filterInput">Filter by City:</label>
-<!-- TODO: add pagination -->
-<div class="container mt-5">
-    <input type="text" id="filterInput" onkeyup="cityFilter()" placeholder="Filter city...">
     <table class="table" id="userTable">
         <thead class="thead-dark">
         <tr>
@@ -16,8 +22,8 @@
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($users as &$user): ?>
-            <tr>
+        <?php foreach ($users as $key => $user): ?>
+            <tr class="<?php echo $key % 2 === 0 ? "even" : ""; ?>">
                 <td><?= $user->getName() ?></td>
                 <td><?= $user->getEmail() ?></td>
                 <td><?= $user->getCity() ?></td>
@@ -26,79 +32,66 @@
         <?php endforeach; ?>
         </tbody>
     </table>
-
-    <form class="form-horizontal">
-        <div class="form-group">
-            <label for="name" class="col-sm-2 control-label">Name:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="name" id="name"/>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="email" class="col-sm-2 control-label">E-mail:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="email" id="email"/>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="city" class="col-sm-2 control-label">City:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="city" id="city"/>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="phone" class="col-sm-2 control-label">Phone:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="phone" id="phone"/>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="button" class="btn btn-primary" id="submitBtn">Create new row</button>
-            </div>
-        </div>
-    </form>
 </div>
 
-<script>
-    $(document).ready(() => {
-        $("#submitBtn").click(() => {
-            const name = $("#name").val();
-            const email = $("#email").val();
-            const city = $("#city").val();
-            const phone = $("#phone").val();
+<!-- modal -->
+<div class="modal fade" id="new-record-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- modal header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="modal-label">Add New User</h4>
+            </div>
 
-            // TODO: add frontend validation here
-            if (name === '' || email === '') {
-                // TODO: print this to filed nex tot ht e
-                alert('Please fill in all required fields.');
-                return;
-            }
+            <!-- modal body -->
+            <div class="modal-body">
+                <form class="form-horizontal" id="new-record-form" novalidate>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Name:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="name" id="name"/>
+                            <small class="text-danger" id="name-error"></small>
+                        </div>
+                    </div>
 
-            // Make AJAX request
-            $.ajax({
-                type: "POST",
-                url: "create.php",
-                data: {
-                    name: name,
-                    email: email,
-                    city: city,
-                    phone: phone
-                },
-                success: (r) => {
-                    // TODO: redraw the user view with data we just received
-                    console.log(r)
-                    window.location.reload();
-                },
-                error: (r) => {
-                    // TODO: propagate data from error to error box
-                    console.log(r);
-                }
-            });
-        });
-    });
-</script>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">E-mail:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="email" id="email"/>
+                            <small class="text-danger" id="email-error"></small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city" class="col-sm-2 control-label">City:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="city" id="city"/>
+                            <small class="text-danger" id="city-error"></small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="col-sm-2 control-label">Phone:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="phone" id="phone"/>
+                            <small class="text-danger" id="phone-error"></small>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="resetForm()">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary" onclick="createNewRecord()">
+                    Create new
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

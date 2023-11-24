@@ -1,9 +1,14 @@
 # Use an official PHP runtime as a parent image
 FROM php:8.1-apache
 
+# obtain composer
+COPY --from=composer:2.6 /usr/bin/composer /usr/local/bin/composer
+
 # install deps
-RUN docker-php-ext-install mysqli pdo pdo_mysql  \
-    && docker-php-ext-enable pdo_mysql
+RUN apt-get update && apt-get install -y git && \
+    docker-php-ext-install mysqli pdo pdo_mysql \
+    && docker-php-ext-enable pdo_mysql && \
+    rm -rf /var/lib/apt/lists/*;
 
 # define environment variables for Apache
 ENV APACHE_DOCUMENT_ROOT /var/www/html/
@@ -14,9 +19,20 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
     && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
     && a2enmod rewrite
 
-# and now copy data
-WORKDIR /var/www/html
-COPY . /var/www/html
+WORKDIR /var/www/html/
+
+COPY composer.json composer.json
+COPY composer.lock composer.lock
+
+RUN composer install \
+    --no-interaction \
+    --no-plugins \
+    --no-scripts \
+    --no-dev \
+    --prefer-dist;
+
+COPY . .
+RUN composer dump-autoload
 
 EXPOSE 80
 CMD ["apache2-foreground"]

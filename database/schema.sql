@@ -41,11 +41,11 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `city`, `phone`, `created_at`) VALUES
-(1, 'Andrej', 'andrej@mail.test', 'Glasgow', '+420777666555' ,'2013-09-19 22:20:19'),
-(2, 'Juraj', 'juraj@mail.test', 'Praha', '+420755633553', '2013-09-19 22:20:34'),
-(3, 'Jožko', 'jozko@mail.test', 'Bratislava', '+420735633113', '2013-09-19 22:21:04'),
-(4, 'Peter', 'peter@mail.test', 'Brno', '+420715633442', '2013-09-19 22:21:17'),
-(5, 'Jon', 'jon@mail.test', 'New York', '+420735633553', '2013-09-19 22:21:41');
+(1, 'Andrej', 'andrej@mail.test', 'Glasgow', '+420 777 666 555' ,'2013-09-19 22:20:19'),
+(2, 'Juraj', 'juraj@mail.test', 'Praha', '+420 755 633 553', '2013-09-19 22:20:34'),
+(3, 'Jožko', 'jozko@mail.test', 'Bratislava', '+420 735 633 113', '2013-09-19 22:21:04'),
+(4, 'Peter', 'peter@mail.test', 'Brno', '+420 715 633 442', '2013-09-19 22:21:17'),
+(5, 'Jon', 'jon@mail.test', 'New York', '+420 735 633 553', '2013-09-19 22:21:41');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

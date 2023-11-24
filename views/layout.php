@@ -13,6 +13,7 @@
     
     <script type="text/javascript" charset="utf-8" src="js/jquery.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/utils.js"></script>
 
   </head>
   <body>
