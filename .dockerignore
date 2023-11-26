@@ -1,0 +1,8 @@
+docker-compose.yml
+package.xml
+vendor
+.DS_Store
+.idea
+Dockerfile
+README.md
+.github
