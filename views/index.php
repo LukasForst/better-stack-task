@@ -11,27 +11,28 @@
             </button>
         </div>
     </div>
-
-    <table class="table" id="userTable">
-        <thead class="thead-dark">
-        <tr>
-            <th>Name</th>
-            <th>E-mail</th>
-            <th>City</th>
-            <th>Phone</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($users as $key => $user): ?>
-            <tr class="<?php echo $key % 2 === 0 ? "even" : ""; ?>">
-                <td><?= $user->getName() ?></td>
-                <td><?= $user->getEmail() ?></td>
-                <td><?= $user->getCity() ?></td>
-                <td><?= $user->getPhone() ?></td>
+    <div class="table-responsive">
+        <table class="table" id="userTable">
+            <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>E-mail</th>
+                <th>City</th>
+                <th>Phone</th>
             </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            <?php foreach ($users as $key => $user): ?>
+                <tr class="<?php echo $key % 2 === 0 ? "even" : ""; ?>">
+                    <td><?= $user->getName() ?></td>
+                    <td><?= $user->getEmail() ?></td>
+                    <td><?= $user->getCity() ?></td>
+                    <td><?= $user->getPhone() ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <!-- modal -->
